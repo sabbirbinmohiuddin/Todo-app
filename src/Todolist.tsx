@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { MdDelete, MdOutlineTaskAlt } from "react-icons/md";
 import { TbEditFilled } from "react-icons/tb";
@@ -19,8 +19,45 @@ type Todo = {
 
 export default function Todolist() {
     const [enterForm, setEnterForm] = useState('')
-    const [mainTodo, setMainTodo] = useState<Todo[]>([])
+    // const [mainTodo, setMainTodo] = useState<Todo[]>([])
+
+    const [mainTodo, setMainTodo] = useState<Todo[]>(() => {
+        try {
+            const savedTodos = localStorage.getItem('my-daily-todos');
+
+            if (savedTodos) {
+                const parsedTodos = JSON.parse(savedTodos);
+
+                if (Array.isArray(parsedTodos)) {
+                    return parsedTodos.map((item) => ({
+                        ...item,
+                        completed: item.completed ?? false,
+                    }));
+                }
+            }
+
+            return [];
+        } catch (error) {
+            console.error('Failed to load todos:', error);
+            return [];
+        }
+    });
+
     const [editId, setEditId] = useState<string | null>(null)
+
+
+    // auto save task 
+    useEffect(() => {
+        try {
+            localStorage.setItem(
+                'my-daily-todos',
+                JSON.stringify(mainTodo)
+            );
+        } catch (error) {
+            console.error('Failed to save todos:', error);
+            toast.error('Could not save your tasks!');
+        }
+    }, [mainTodo]);
 
 
     // add button
