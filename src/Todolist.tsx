@@ -111,7 +111,8 @@ export default function Todolist() {
 
         toast.success(
             completed ? 'Task Completed!' : 'Task marked as incomplete!', {
-            position: 'top-right'
+            position: 'top-right',
+            theme: 'dark'
         }
         )
     }
@@ -121,8 +122,6 @@ export default function Todolist() {
         setEnterForm(item.title)
         setEditId(String(item.id))
     }
-
-
     // update btn
     const handleUpdate = () => {
         if (!enterForm.trim()) {
@@ -130,19 +129,15 @@ export default function Todolist() {
                 position: 'top-right'
             })
         }
-
         if (editId === null) return
-
         const updatedTodos = mainTodo.map((item) =>
             String(item.id) === editId
                 ? { ...item, title: enterForm.trim() }
                 : item
         )
-
         setMainTodo(updatedTodos)
         setEnterForm('')
         setEditId(null)
-
         toast.success('Task Updated Successfully', {
             position: 'top-right'
         })
@@ -234,14 +229,14 @@ export default function Todolist() {
                         </label>
 
                         <div className={`flex flex-col gap-3 rounded-2xl border bg-slate-50 p-2 transition focus-within:ring-4 sm:flex-row ${editId === null
-                            ? 'border-slate-200 focus-within:border-emerald-400 focus-within:ring-emerald-100'
+                            ? 'border-slate-1000 focus-within:border-emerald-400 focus-within:ring-emerald-100'
                             : 'border-blue-300 focus-within:border-blue-400 focus-within:ring-blue-100'
                             }`}>
                             <input
                                 placeholder="What do you need to do?"
                                 value={enterForm}
                                 onChange={(event) => setEnterForm(event.target.value)}
-                                className="min-w-0 flex-1 bg-transparent px-3 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 sm:px-4"
+                                className="min-w-0 flex-1  bg-transparent px-3 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 sm:px-4"
                                 type="text"
                             />
 
@@ -330,7 +325,7 @@ export default function Todolist() {
                                         </p>
                                     </div>
 
-                                    <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:shrink-0">
+                                    <div className="flex justify-end w-full flex-wrap items-center gap-2 sm:w-auto sm:shrink-0">
                                         <button
                                             onClick={() => handleEdit(item)}
                                             type="button"
@@ -350,13 +345,7 @@ export default function Todolist() {
                                         >
                                             <MdDelete />
                                         </button>
-                                        <button
-                                            onClick={() => handleComplete(item.id, true)}
-                                            title="Mark as completed"
-                                            className="rounded-lg bg-green-100 p-2 text-green-700 hover:bg-green-500 hover:text-white"
-                                        >
-                                            <FaCheck />
-                                        </button>
+
 
                                         <button
                                             onClick={() => handleComplete(item.id, false)}
@@ -365,6 +354,16 @@ export default function Todolist() {
                                         >
                                             <FaXmark />
                                         </button>
+
+                                        <button
+                                            onClick={() => handleComplete(item.id, true)}
+                                            title="Mark as completed"
+                                            className="rounded-lg bg-green-100 p-2 text-green-700 hover:bg-green-500 hover:text-white"
+                                        >
+                                            <FaCheck />
+                                        </button>
+
+
                                     </div>
                                 </div>
                             ))
