@@ -369,9 +369,13 @@ export default function Todolist() {
 
                         <p className="text-xs font-semibold text-emerald-700">
                             {mainTodo.length === 0
-                                ? 'Ready when you are ✨'
-                                : `${mainTodo.length} task${mainTodo.length !== 1 ? 's' : ''} in your list`}
+                                ? 'Created by SABBIR BIN MOHIUDDIN'
+                                : `Created by SABBIR BIN MOHIUDDIN`}
+                            {/* ${mainTodo.length} task${mainTodo.length !== 1 ? 's' : ''} in your list */}
                         </p>
+                        {/* <P>
+                            Created by SABBIR BIN MOHIUDDIN
+                        </P> */}
                     </div>
                 </div>
             </div>
