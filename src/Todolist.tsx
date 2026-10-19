@@ -308,31 +308,33 @@ export default function Todolist() {
                             mainTodo.map((item, index) => (
                                 <div
                                     key={item.id}
-                                    className={`group flex min-w-0 items-center gap-3 rounded-2xl border p-3 transition duration-200 hover:-translate-y-0.5 hover:shadow-md sm:gap-4 sm:p-4 ${editId === String(item.id)
-                                        ? 'border-blue-300 bg-blue-50 shadow-sm'
-                                        : 'border-slate-200 bg-white hover:border-emerald-200'
+                                    // className={`group flex min-w-0 items-center gap-3 rounded-2xl border p-3 transition duration-200 hover:-translate-y-0.5 hover:shadow-md sm:gap-4 sm:p-4 ${editId === String(item.id)
+                                    //     ? 'border-blue-300 bg-blue-50 shadow-sm'
+                                    //     : 'border-slate-200 bg-white hover:border-emerald-200'
+                                    //     }`}
+
+                                    className={`group flex min-w-0 flex-col items-stretch gap-3 rounded-2xl border p-3 transition duration-200 hover:shadow-md sm:flex-row sm:items-center sm:gap-4 sm:p-4 ${editId === String(item.id)
+                                            ? 'border-blue-300 bg-blue-50 shadow-sm'
+                                            : 'border-slate-200 bg-white hover:border-emerald-200'
                                         }`}
                                 >
                                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-sm font-extrabold text-emerald-700 transition group-hover:bg-emerald-100">
                                         {String(index + 1).padStart(2, '0')}
                                     </div>
 
-                                    <div className="min-w-0 flex-1 py-1">
-                                        {/* <p className="break-words text-sm font-semibold leading-6 text-slate-800 sm:text-base">
-                                            {item.title}
-                                        </p> */}
-
-                                        <span
-                                            className={`w-full mr-2 font-bold  p-2 ${item.completed
-                                                ? 'text-gray-400 line-through'
-                                                : 'text-slate-800'
+                                    <div className="min-w-0 w-full flex-1 py-1">
+                                        <p
+                                            className={`block w-full whitespace-normal break-words [overflow-wrap:anywhere] text-sm font-bold leading-6 sm:text-base ${item.completed
+                                                    ? 'text-gray-400 line-through'
+                                                    : 'text-slate-800'
                                                 }`}
                                         >
                                             {item.title}
-                                        </span>
+                                        </p>
                                     </div>
 
-                                    <div className="flex shrink-0 items-center gap-2">
+                                    <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:shrink-0">
+                                        {/* <div className="flex shrink-0 items-center gap-2"> */}
                                         <button
                                             onClick={() => handleEdit(item)}
                                             type="button"
