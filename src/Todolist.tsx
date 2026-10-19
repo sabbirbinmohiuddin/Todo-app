@@ -55,7 +55,9 @@ export default function Todolist() {
             );
         } catch (error) {
             console.error('Failed to save todos:', error);
-            toast.error('Could not save your tasks!');
+            toast.error('Could not save your tasks!', {
+                position: 'top-right'
+            });
         }
     }, [mainTodo]);
 
@@ -65,7 +67,7 @@ export default function Todolist() {
         if (!enterForm.trim()) {
             return toast.error('Please Add Your Task', {
                 theme: 'colored',
-                position: 'bottom-right',
+                position: 'top-right',
                 autoClose: 2000,
             })
         }
@@ -81,7 +83,8 @@ export default function Todolist() {
         setEnterForm('')
         toast.success('Your Task Added Successfully', {
             autoClose: 2000,
-            theme: 'colored'
+            theme: 'colored',
+            position: 'top-right'
         })
     }
     // dlt btn 
@@ -92,7 +95,9 @@ export default function Todolist() {
             return item.id != id
         })
         setMainTodo(updateTodosAfterDelete)
-        toast.success('Task Deleted Successfully')
+        toast.success('Task Deleted Successfully', {
+            position: 'top-right'
+        })
     }
     // handleComplete
     const handleComplete = (id: string | number, completed: boolean) => {
@@ -105,7 +110,9 @@ export default function Todolist() {
         )
 
         toast.success(
-            completed ? 'Task Completed!' : 'Task marked as incomplete!'
+            completed ? 'Task Completed!' : 'Task marked as incomplete!', {
+            position: 'top-right'
+        }
         )
     }
 
@@ -119,7 +126,9 @@ export default function Todolist() {
     // update btn
     const handleUpdate = () => {
         if (!enterForm.trim()) {
-            return toast.error('Please enter your task')
+            return toast.error('Please enter your task', {
+                position: 'top-right'
+            })
         }
 
         if (editId === null) return
@@ -134,7 +143,9 @@ export default function Todolist() {
         setEnterForm('')
         setEditId(null)
 
-        toast.success('Task Updated Successfully')
+        toast.success('Task Updated Successfully', {
+            position: 'top-right'
+        })
     }
 
     // reset btn 
@@ -146,7 +157,8 @@ export default function Todolist() {
         if (!isConfirm) return
         setMainTodo([]);
         toast.success('All task has been cleared!', {
-            theme: 'dark'
+            theme: 'dark',
+            position: 'top-right'
         })
     }
 
